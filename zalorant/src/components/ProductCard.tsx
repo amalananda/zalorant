@@ -16,7 +16,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         height={400}
         className="w-full h-48 object-cover rounded-lg mb-4"
       />
-      <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
+      <h3 className="text-xl font-semibold text-gray-800 truncate max-h-[3rem] leading-[1.5rem]">
+        {product.name}
+      </h3>
       <p className="text-gray-600 text-sm">{product.excerpt}</p>
       <p className="text-lg font-bold text-indigo-600 mt-2">
         Rp{product.price.toLocaleString("id-ID")}
