@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 import { ObjectId } from "mongodb"
 
-const JWT_SECRET = "your_secret_key_here"
+const JWT_SECRET = process.env.JWT_SECRET
 
 if (!JWT_SECRET) {
   console.error("JWT_SECRET not set")
