@@ -2,14 +2,13 @@
 import Banner from '@/components/Banner'
 import DetailStore from '@/components/DetailStore'
 import FeaturedProducts from '@/components/FeaturedProduct'
-import Product from '@/db/models/product' // Import model Product
+import Product from '@/db/models/product'
 import { ProductType } from '@/types'
 
 export default async function Home() {
-  await Product.initialize() // Pastikan collection diinisialisasi terlebih dahulu
-  const products: ProductType[] = await Product.findAll()
+  await Product.initialize()
+  const products: ProductType[] = await Product.findAll({ skip: 0, limit: Infinity })
 
-  // Ambil produk unggulan
   const featuredProducts = products.slice(0, 5)
 
   return (

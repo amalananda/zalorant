@@ -13,12 +13,10 @@ export default function Register() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // Reset pesan error dan sukses
     setError(null)
     setSuccessMessage(null)
 
-    // Kirim data register ke API
-    const response = await fetch('/api/users/register', {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,7 +37,6 @@ export default function Register() {
       setEmail('')
       setPassword('')
     } else {
-      // Jika ada error, tampilkan pesan error
       const data = await response.json()
       setError(data.error || 'Registration failed')
     }
@@ -47,9 +44,9 @@ export default function Register() {
 
   return (
     <>
-      <div className="flex h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-background">
+      <div className="flex h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">
+          <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-black">
             Register to your account
           </h2>
         </div>
@@ -58,7 +55,7 @@ export default function Register() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Input Name */}
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-900">
+              <label htmlFor="name" className="block text-sm font-medium text-black">
                 Name
               </label>
               <div className="mt-2">
@@ -69,14 +66,14 @@ export default function Register() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                  className="block w-full rounded-md border-2 border-gray-300 bg-white text-black shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:border-black sm:text-sm"
                 />
               </div>
             </div>
 
             {/* Input Username */}
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-900">
+              <label htmlFor="username" className="block text-sm font-medium text-black">
                 Username
               </label>
               <div className="mt-2">
@@ -87,14 +84,14 @@ export default function Register() {
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                  className="block w-full rounded-md border-2 border-gray-300 bg-white text-black shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:border-black sm:text-sm"
                 />
               </div>
             </div>
 
             {/* Input Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-900">
+              <label htmlFor="email" className="block text-sm font-medium text-black">
                 Email address
               </label>
               <div className="mt-2">
@@ -105,14 +102,14 @@ export default function Register() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                  className="block w-full rounded-md border-2 border-gray-300 bg-white text-black shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:border-black sm:text-sm"
                 />
               </div>
             </div>
 
             {/* Input Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-900">
+              <label htmlFor="password" className="block text-sm font-medium text-black">
                 Password
               </label>
               <div className="mt-2">
@@ -123,7 +120,7 @@ export default function Register() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                  className="block w-full rounded-md border-2 border-gray-300 bg-white text-black shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:border-black sm:text-sm"
                 />
               </div>
             </div>
@@ -146,7 +143,7 @@ export default function Register() {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="w-full py-2 px-4 bg-black text-white font-semibold rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-50"
               >
                 Register
               </button>

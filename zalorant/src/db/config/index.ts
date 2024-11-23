@@ -1,7 +1,7 @@
 import { Db, MongoClient, ServerApiVersion } from 'mongodb'
 
 
-const uri = "mongodb+srv://amala:MtMSu3zD0ARHxPNj@cluster2.lvn1z.mongodb.net/?retryWrites=true&w=majority&appName=Cluster2"
+const uri = process.env.MONGO_URI
 
 if (!uri) {
   throw new Error("MONGODB_URI is not defined in environment variables.")
@@ -46,27 +46,3 @@ export async function closeConnection(): Promise<void> {
 }
 
 export { client }
-
-
-// const client = new MongoClient(uri, {
-//   serverApi: {
-//     version: ServerApiVersion.v1,
-//     strict: true,
-//     deprecationErrors: true,
-//   }
-// })
-
-// export const connectToDB = async () => {
-//   try {
-//     if (!client.isco) {
-//       await client.connect()
-//     }
-//     return client.db("gc2-database")
-//   } catch (error) {
-//     console.error("Failed to connect to MongoDB", error)
-//     throw error
-//   }
-// }
-
-
-///import { MongoClient, Db, ServerApiVersion } from "mongodb";

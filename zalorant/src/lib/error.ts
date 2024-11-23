@@ -1,3 +1,4 @@
+import { JWSInvalid } from 'jose/errors'
 import { ZodError } from 'zod'
 
 export class HttpError extends Error {
@@ -21,6 +22,15 @@ export function handleError(error: unknown) {
       status: 400
     })
   }
+
+  if (error instanceof JWSInvalid) {
+    return Response.json({
+      message: "Invalid Token JWS"
+    }, {
+      status: 401
+    })
+  }
+
   return Response.json({
     message: "Internal Server Error"
   }, {
