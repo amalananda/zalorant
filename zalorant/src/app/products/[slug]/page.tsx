@@ -4,7 +4,6 @@ import { ProductType } from '@/types'
 import Product from '@/db/models/product'
 import AddToWishList from '@/components/WishList'
 
-// Fungsi untuk fetch data produk berdasarkan slug
 async function fetchProduct(slug: string): Promise<ProductType | null> {
   try {
     const product = await Product.findBySlug(slug)
@@ -17,7 +16,6 @@ async function fetchProduct(slug: string): Promise<ProductType | null> {
 
 
 
-// Metadata dinamis berdasarkan produk
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const product = await fetchProduct(params.slug)
 
@@ -34,7 +32,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-// Komponen Halaman Detail Produk
 export default async function ProductDetail({ params }: { params: { slug: string } }) {
   const product = await fetchProduct(params.slug)
 
@@ -50,7 +47,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
   return (
     <div className="max-w-7xl mx-auto py-10 px-6">
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Thumbnail Image */}
+
         <div className="flex-shrink-0 w-full lg:w-1/2">
           <Image
             src={product.thumbnail}
@@ -61,7 +58,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
           />
         </div>
 
-        {/* Product Details */}
+
         <div className="w-full lg:w-1/2">
           <h1 className="text-4xl font-bold text-gray-800">{product.name}</h1>
           <p className="text-gray-600 mt-4">{product.description}</p>
@@ -87,7 +84,6 @@ export default async function ProductDetail({ params }: { params: { slug: string
             </div>
           </div>
 
-          {/* Menampilkan Gambar Tambahan */}
           <div className="mt-8">
             <h3 className="text-2xl font-semibold text-gray-800">More Images</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-6">

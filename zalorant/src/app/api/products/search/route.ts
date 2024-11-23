@@ -1,4 +1,4 @@
-import Product from "@/db/models/product"
+
 import { NextResponse } from "next/server"
 
 export async function GET(request: Request) {
@@ -11,13 +11,13 @@ export async function GET(request: Request) {
       )
     }
 
-    const products = await Product.findAll({
-      where: {
-        name: { [Op.like]: `%${query}%` },
-      },
-    })
+    // const products = await Product.findAll({
+    //   // where: {
+    //   //   name: { [Op.like]: `%${query}%` },
+    //   // },
+    // })
 
-    return NextResponse.json(products, { status: 200 })
+    // return NextResponse.json(products, { status: 200 })
   } catch (error) {
     console.error("Error searching products:", error)
     return NextResponse.json(

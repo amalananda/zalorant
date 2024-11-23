@@ -1,15 +1,15 @@
-'use client'  // Menandakan ini adalah Client Component
+'use client'
 export const dynamic = 'force-dynamic'
 
 import { useState } from 'react'
 
 export default function Login() {
-  // State untuk form input
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
 
-  // Handle submit form
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -26,8 +26,6 @@ export default function Login() {
           password,
         }),
       })
-
-      // Pastikan status HTTP adalah 200 (OK) dan response berupa JSON
       if (!response.ok) {
         const errorData = await response.text()
         throw new Error(`Error: ${response.status} - ${errorData}`)
@@ -56,7 +54,7 @@ export default function Login() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email Input */}
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-black">
                 Email address
@@ -75,7 +73,7 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Password Input */}
+
             <div>
               <div className="flex items-center justify-between">
                 <label htmlFor="password" className="block text-sm font-medium text-black">
@@ -96,14 +94,14 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Error Message */}
+
             {error && (
               <div className="text-red-600 text-sm">
                 <p>{error}</p>
               </div>
             )}
 
-            {/* Submit Button */}
+
             <div>
               <button
                 type="submit"

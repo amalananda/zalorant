@@ -1,12 +1,12 @@
 import Product from '@/db/models/product'
-// import { ProductType } from '@/types'
+
 import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
 
   const url = new URL(request.url)
   const slug = url.pathname.split('/').pop()
-  // console.log(slug);
+
 
   if (!slug) {
     return NextResponse.json({ error: 'Slug is required' }, { status: 400 })

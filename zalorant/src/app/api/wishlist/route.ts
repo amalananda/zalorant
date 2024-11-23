@@ -90,8 +90,6 @@ export async function DELETE(request: NextRequest) {
     if (!existingProduct) {
       throw new HttpError('Product not found in your wishlist', 404)
     }
-
-    // Remove the product from the wishlist
     await WishList.remove({ userId: new ObjectId(userId), productId: new ObjectId(productId) })
 
     return Response.json({ message: 'Product removed from wishlist' }, { status: 200 })
