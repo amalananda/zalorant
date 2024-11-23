@@ -1,4 +1,5 @@
 'use client'  // Menandakan ini adalah Client Component
+export const dynamic = 'force-dynamic'
 
 import { useState } from 'react'
 
@@ -35,8 +36,12 @@ export default function Login() {
       const data = await response.json()
       console.log('Login successful:', data)
       window.location.href = '/'
-    } catch (err: any) {
-      setError(err.message || 'Login failed')
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || 'Login failed')
+      } else {
+        setError('Terjadi kesalahan yang tidak diketahui')
+      }
     }
   }
 

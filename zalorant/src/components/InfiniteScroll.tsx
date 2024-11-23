@@ -1,5 +1,9 @@
+export const dynamic = 'force-dynamic'
+
 import { ProductType } from '@/types'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
+
+
 
 interface InfiniteScrollProps {
   fetchData: (skip: number, limit: number) => Promise<{ items: ProductType[], hasMore: boolean }>
@@ -10,11 +14,11 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({ fetchData, children }) 
   const [items, setItems] = useState<ProductType[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [hasMore, setHasMore] = useState<boolean>(true)
-  const [page, setPage] = useState<number>(1) // Menggunakan page, bukan skip
-  const limit = 10 // Jumlah produk yang dimuat setiap kali
+  const [page, setPage] = useState<number>(1)
+  const limit = 10
   const footerRef = useRef<HTMLDivElement>(null)
 
-  const loadMore = async () => {
+  const loadMore = useCallback(async () => {
     if (loading || !hasMore) return
     setLoading(true)
 
@@ -25,13 +29,13 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({ fetchData, children }) 
       }
 
       setHasMore(moreItems)
-      setPage((prevPage) => prevPage + 1) // Increment page setiap kali load
+      setPage((prevPage) => prevPage + 1)
     } catch (error) {
       console.error("Error loading more items:", error)
     } finally {
       setLoading(false)
     }
-  }
+  }, [loading, hasMore, page, limit, fetchData])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -43,20 +47,21 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({ fetchData, children }) 
       { rootMargin: "100px" }
     )
 
-    if (footerRef.current) {
-      observer.observe(footerRef.current)
+    const footerNode = footerRef.current
+    if (footerNode) {
+      observer.observe(footerNode)
     }
 
     return () => {
-      if (footerRef.current) {
-        observer.unobserve(footerRef.current)
+      if (footerNode) {
+        observer.unobserve(footerNode)
       }
     }
-  }, [loading, hasMore])
+  }, [loading, hasMore, loadMore])
 
   useEffect(() => {
-    loadMore() // Muat data pertama kali
-  }, [])
+    loadMore()
+  }, [loadMore])
 
   return (
     <div>

@@ -1,10 +1,11 @@
 'use client'
+export const dynamic = 'force-dynamic'
 
 import Image from 'next/image'
 import Link from 'next/link'
 import InfiniteScroll from '@/components/InfiniteScroll'
 import AddToWishList from '@/components/WishList'
-import { useState } from 'react'
+
 
 
 async function fetchProducts(page = 1, limit = 10) {
@@ -22,17 +23,6 @@ async function fetchProducts(page = 1, limit = 10) {
 }
 
 export default function Products() {
-  const [wishlist, setWishlist] = useState<string[]>([]) // state untuk menyimpan wishlist
-
-  // Perbaikan di sini, pastikan productId diterima sebagai parameter
-  const handleWishlistChange = (productId: string, isWishlisted: boolean) => {
-    if (isWishlisted) {
-      setWishlist((prev) => [...prev, productId])
-    } else {
-      setWishlist((prev) => prev.filter((id) => id !== productId))
-    }
-  }
-
   return (
     <div>
       <div className="bg-gray-50 py-16 w-full">
